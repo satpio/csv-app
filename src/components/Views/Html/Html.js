@@ -38,7 +38,10 @@ export class Html extends HtmlCsvMixin(Base) {
 
   callback() {
     const parsedValue = objToCsvString(this.table.objData, this.delimeter);
-    this.store.dispatch(setCsvStringData(parsedValue));
+    const { csvStringData } = this.store.getState();
+    if (csvStringData !== parsedValue) {
+      this.store.dispatch(setCsvStringData(parsedValue));
+    }
   }
 
   render() {

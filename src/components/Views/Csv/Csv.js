@@ -38,7 +38,11 @@ export class Csv extends HtmlCsvMixin(Base) {
     }
     const value = this.checkSeparators();
     const parsedValue = csvStringToObj(value, this.delimeter);
-    this.store.dispatch(setObjData(parsedValue));
+
+    const { objData } = this.store.getState();
+    if (JSON.stringify(objData) !== JSON.stringify(parsedValue)) {
+      this.store.dispatch(setObjData(parsedValue));
+    }
   }
 
   getTextarea() {
