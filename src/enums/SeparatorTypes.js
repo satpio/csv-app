@@ -1,7 +1,7 @@
 export const SEPARATOR_TYPES = {
-  COMMA: 'comma',
-  TAB: 'tab',
-  SEMICOLON: 'semicolon',
+  COMMA: 'COMMA',
+  TAB: 'TAB',
+  SEMICOLON: 'SEMICOLON',
 };
 
 export const SEPARATOR_VALUES = {

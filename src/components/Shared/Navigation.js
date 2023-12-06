@@ -25,7 +25,7 @@ export class Navigation extends Base {
       :host {
         display: flex;
         flex-direction: row;
-        align-content: center;
+        align-items: center;
         margin: 0 0 12px;
       }
     `,

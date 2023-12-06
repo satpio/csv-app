@@ -18,9 +18,18 @@ export const HtmlCsvMixin = dedupeMixin(
       static styles = [
         css`
           :host {
-            width: calc((100% / 2) - 10px);
             padding: 0 5px;
             box-sizing: border-box;
+          }
+          @media screen and (max-width: 767px) {
+            :host {
+              width: calc(100% - 10px);
+            }
+          }
+          @media screen and (min-width: 768px) {
+            :host {
+              width: calc((100% / 2) - 10px);
+            }
           }
         `,
       ];

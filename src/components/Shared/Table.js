@@ -1,4 +1,5 @@
-import { html, nothing } from 'lit';
+import { html, css, adoptStyles, nothing } from 'lit';
+import { styleMap } from 'lit/directives/style-map.js';
 import { LionInput } from '@lion/ui/input.js';
 import { Base } from '../Base/Base.js';
 
@@ -17,6 +18,17 @@ export class Table extends Base {
     'lion-input': LionInput,
   };
 
+  connectedCallback() {
+    super.connectedCallback();
+    adoptStyles(this.shadowRoot, [
+      css`
+        .form-control {
+          width: 100%;
+        }
+      `,
+    ]);
+  }
+
   onInputChange(ev, rowIndex, colIndex) {
     this.objData.values[rowIndex][colIndex] = ev.target.value;
   }
@@ -31,21 +43,29 @@ export class Table extends Base {
   }
 
   getThead() {
+    const colStyles = styleMap({
+      width: `calc(100% / ${this.objData.headers.length})`,
+    });
     return html`
       <thead>
         <tr>
-          ${this.objData.headers.map(header => html`<th>${header}</th>`)}
+          ${this.objData.headers.map(
+            header => html`<th style=${colStyles}>${header}</th>`
+          )}
         </tr>
       </thead>
     `;
   }
 
   getRow(row, rowIndex) {
+    const colStyles = styleMap({
+      width: `calc(100% / ${this.objData.headers.length})`,
+    });
     return html`
       <tr>
         ${row.map(
           (value, colIndex) =>
-            html`<td>
+            html`<td style=${colStyles}>
               <lion-input
                 .modelValue=${value}
                 @model-value-changed=${ev =>

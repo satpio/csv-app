@@ -10,7 +10,7 @@ export const csvStringToObj = (csvString, delimeter) => {
     );
     return obj;
   } catch (err) {
-    return err;
+    console.error(`Ups, something went wrong :(\n${err}`);
   }
 };
 
@@ -33,6 +33,6 @@ export const objToCsvString = (obj, delimeter) => {
     }, '');
     return csvString;
   } catch (err) {
-    return err;
+    console.error(`Ups, something went wrong :(\n${err}`);
   }
 };
