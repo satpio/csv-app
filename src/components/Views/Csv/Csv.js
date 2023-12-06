@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { LionTextarea } from '@lion/ui/textarea.js';
 import { Base } from '../../Base/Base.js';
 import { HtmlCsvMixin } from '../../../mixins/HtmlCsvMixin.js';
-import { setObjData } from '../../../redux/Actions.js';
+import { setCsvStringData, setObjData } from '../../../redux/Actions.js';
 import { csvStringToObj } from '../../../helpers/Parser.js';
 
 export class Csv extends HtmlCsvMixin(Base) {
@@ -37,6 +37,9 @@ export class Csv extends HtmlCsvMixin(Base) {
       return;
     }
     const value = this.checkSeparators();
+    if (value !== this.csvStringData) {
+      this.store.dispatch(setCsvStringData(value));
+    }
     const parsedValue = csvStringToObj(value, this.delimeter);
 
     const { objData } = this.store.getState();
